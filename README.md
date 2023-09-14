@@ -50,6 +50,38 @@
 ### Splunk Apps:
 - Utilize Splunk apps like Splunk Enterprise Security (ES) for advanced threat hunting capabilities.
 
+### Detect unusual access patterns
+```
+index=your_index sourcetype=your_sourcetype 
+| stats count by user 
+| sort -count 
+| where count < 5
+```
+
+### Outbound anomolies in traffic
+```
+index=your_index sourcetype=your_sourcetype 
+| stats sum(bytes_out) as total_bytes by src_ip 
+| eventstats avg(total_bytes) as avg_bytes 
+| where total_bytes > avg_bytes*2
+```
+
+### Failed, followed by a successful login
+```
+index=your_index sourcetype=your_sourcetype 
+| transaction maxspan=1h startswith="Failed Login" endswith="Successful Login" 
+| search Failed AND Successful
+```
+
+### Rapidly changing firewall rules
+```
+index=your_index sourcetype=your_sourcetype 
+| timechart span=1h count by firewall_rule 
+| streamstats window=3 sum(count) as total_count by firewall_rule 
+| where total_count > 10
+```
+
+
 ### Documentation and Community:
 - [Splunk Documentation](https://docs.splunk.com/)
 - [Splunk Community](https://community.splunk.com/)
