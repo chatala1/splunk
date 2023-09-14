@@ -96,7 +96,14 @@ index=your_index sourcetype=your_sourcetype
 | where tonumber($2) > 1000000
 ```
 
-
+### Analyze DNS activity on subdomains
+```
+index=your_index sourcetype=your_sourcetype 
+| rex field=query "\.(?<subdomain>[^.]+)\." 
+| stats count by subdomain 
+| sort -count 
+| where count > 10
+```
 
 ### Documentation and Community:
 - [Splunk Documentation](https://docs.splunk.com/)
