@@ -89,6 +89,15 @@ index=your_index sourcetype=your_sourcetype
 | where count > 100 AND NOT dest_port IN (80, 443, 22)
 ```
 
+### Identify large file downloads
+```
+index=your_index sourcetype=your_sourcetype 
+| rex field=_raw "GET\s(.*)\sHTTP/1.1\"\s\d+\s(\d+)" 
+| where tonumber($2) > 1000000
+```
+
+
+
 ### Documentation and Community:
 - [Splunk Documentation](https://docs.splunk.com/)
 - [Splunk Community](https://community.splunk.com/)
