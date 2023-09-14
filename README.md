@@ -81,6 +81,13 @@ index=your_index sourcetype=your_sourcetype
 | where total_count > 10
 ```
 
+### Spikes to uncommon ports
+```
+index=your_index sourcetype=your_sourcetype 
+| stats count by dest_port 
+| sort -count 
+| where count > 100 AND NOT dest_port IN (80, 443, 22)
+```
 
 ### Documentation and Community:
 - [Splunk Documentation](https://docs.splunk.com/)
