@@ -1,5 +1,72 @@
 # Splunk> Cheat Sheet
 
+Basic Search Commands:
+----------------------
+| Table Command:      | Description:                            |
+|----------------------|----------------------------------------|
+| `index=`            | Search data in a specific index.        |
+| `source=`           | Search data from a specific source.     |
+| `sourcetype=`       | Search data of a specific sourcetype.  |
+| `host=`             | Search data from a specific host.       |
+| `search`            | Start a search.                         |
+| `|` (pipe)          | Pass results from one command to another.|
+
+Time Range:
+-----------
+| Time Range Command: | Description:                            |
+|----------------------|----------------------------------------|
+| `earliest=`         | Specify the start of the time range.   |
+| `latest=`           | Specify the end of the time range.     |
+| `timechart`         | Create a time-based chart.             |
+
+Filtering and Fields:
+----------------------
+| Filtering and Fields Commands: | Description:                        |
+|-------------------------------|------------------------------------|
+| `search term`                  | Search for specific terms.         |
+| `NOT term`                     | Exclude results containing `term`. |
+| `field=value`                  | Filter by a specific field value.  |
+| `field!=value`                 | Exclude specific field values.     |
+| `field>value`                  | Filter by values greater than.     |
+| `field<value`                  | Filter by values less than.        |
+| `field IN (val1, val2)`        | Filter by multiple values.         |
+| `field IS NULL`                | Filter for empty fields.           |
+| `| stats`                      | Aggregate data using statistics.   |
+| `| sort`                       | Sort results based on a field.     |
+| `| eval`                       | Create calculated fields.          |
+
+Advanced Commands:
+------------------
+| Advanced Commands: | Description:                          |
+|--------------------|--------------------------------------|
+| `rex`              | Extract fields using regular expressions. |
+| `transaction`      | Group events into transactions.      |
+| `dedup`            | Remove duplicate events.              |
+| `lookup`           | Enrich data with external sources.    |
+| `join`             | Combine data from multiple sources.   |
+| `eval`             | Create calculated fields.            |
+
+Reporting and Visualization:
+---------------------------
+| Reporting and Visualization Commands: | Description:               |
+|--------------------------------------|---------------------------|
+| `| table`                            | Display results in a table. |
+| `| stats`                            | Generate statistics.        |
+| `| chart`                            | Create charts and graphs.  |
+| `| timechart`                        | Create time-based charts.  |
+
+Note: Replace placeholders like `index`, `source`, `sourcetype`, `host`, `term`, `field`, `value`, etc., with actual values relevant to your search.
+
+Examples:
+---------
+- `index=your_index sourcetype=your_sourcetype | search "error"`
+- `index=your_index sourcetype=your_sourcetype earliest=-24h latest=now | stats count by field`
+- `index=your_index sourcetype=your_sourcetype | timechart count by field`
+- `index=your_index sourcetype=your_sourcetype | table field1, field2 | sort field1`
+
+Feel free to customize and expand this cheat sheet to include specific commands and examples relevant to your use case and data.
+
+
 ### Basic Search Commands:
 - `index=your_index sourcetype=your_sourcetype` - Filter data based on index and sourcetype.
 - `source="your_source"` - Filter data based on the source of the logs.
